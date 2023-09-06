@@ -1,9 +1,10 @@
+import { Home } from './pages/Home'
 
 function App() {
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div className='w-screen h-screen bg-dark-primary text-zinc-300'>
+      <Home />
+    </div>
   )
 }
 
