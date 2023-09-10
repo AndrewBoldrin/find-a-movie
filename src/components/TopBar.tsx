@@ -1,7 +1,12 @@
 import LogoSvg from '@/assets/Logo.svg'
 import Hamburguer from '@/assets/Hamburguer.svg'
+import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from '@/firebase/config'
 
 export function TopBar() {
+
+    const app = initializeApp(firebaseConfig)
+
     return (
         <div className="relative w-full h-[5rem] bg-dark-primary border-2 border-dark-secondary">
             <div className='w-full md:w-[73rem] h-full flex justify-between items-center px-8 md:px-0 md:m-auto'>
