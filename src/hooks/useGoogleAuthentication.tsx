@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app'
 import { firebaseConfig } from '@/firebase/config'
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
-
 export function useGoogleAuthentication () {
     initializeApp(firebaseConfig)
     const provider = new GoogleAuthProvider()
@@ -18,6 +17,6 @@ export function useGoogleAuthentication () {
     }
 
     return {
-        login, logout
+        login, logout, auth
     }
 }

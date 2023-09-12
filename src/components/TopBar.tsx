@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import LogoSvg from '@/assets/Logo.svg'
 import Hamburguer from '@/assets/Hamburguer.svg'
 import UserCircle from '@/assets/UserCircle.svg'
@@ -9,7 +9,7 @@ import { useGoogleAuthentication } from '@/hooks/useGoogleAuthentication'
 export function TopBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { isLogged, username, photo, setIsLogged, setUsername, setPhoto } = useContext(UserContext) as UserContextType
-    const { login, logout } = useGoogleAuthentication()
+    const { auth, login, logout } = useGoogleAuthentication()
 
     async function onLogin() {
         const data = await login()
@@ -22,7 +22,20 @@ export function TopBar() {
         logout()
         setIsLogged(false)
         setUsername(null)
+        setPhoto(null)
     }
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                setIsLogged(true)
+                setUsername(user.displayName)
+                setPhoto(user.photoURL)
+            }
+            else setIsLogged(false)
+        })
+    })
+
 
     return (
         <div className="relative w-full h-[5rem] bg-dark-primary border-2 border-dark-secondary">
