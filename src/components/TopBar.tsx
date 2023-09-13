@@ -8,6 +8,7 @@ import { useGoogleAuthentication } from '@/hooks/useGoogleAuthentication'
 
 export function TopBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isToggleMenuOpen, setIsToggleMenuOpen] = useState(false)
     const { isLogged, username, photo, setIsLogged, setUsername, setPhoto } = useContext(UserContext) as UserContextType
     const { auth, login, logout } = useGoogleAuthentication()
 
@@ -36,13 +37,23 @@ export function TopBar() {
         })
     })
 
-
     return (
         <div className="relative w-full h-[5rem] bg-dark-primary border-2 border-dark-secondary">
             <div className='w-full md:w-[73rem] h-full flex justify-between items-center px-8 md:px-0 md:m-auto'>
-                <button>
-                    <img src={Hamburguer} alt="toggle menu" className='w-8 h-8 md:hidden'/>
-                </button>
+                <div className='relative z-10'>
+                    <button className='w-8 h-8' onClick={() => setIsToggleMenuOpen(!isToggleMenuOpen)}>
+                        <img src={Hamburguer} alt="toggle menu" className='w-8 h-8 md:hidden'/>
+                    </button>
+                    {isToggleMenuOpen &&
+                        <div className='absolute left-0 bg-dark-contrast-dark rounded-sm'>
+                            <ul className='flex flex-col'>
+                                <li className='w-full text-center px-6 py-3 text-zinc-300 active:bg-dark-contrast-light active:text-red-secondary'>Filmes</li>
+                                <li className='w-full text-center px-6 py-3 text-zinc-300 active:bg-dark-contrast-light active:text-red-secondary'>Series</li>
+                                <li className='w-full text-center px-6 py-3 text-zinc-300 active:bg-dark-contrast-light active:text-red-secondary'>Favorites</li>
+                            </ul>
+                        </div> 
+                    }
+                </div>
                 <div className='w-full md:w-auto left-0 absolute md:relative'>
                     <img src={LogoSvg} alt="logo" className='m-auto md:m-0 md:mr-[3.125rem]'/>
                 </div>
