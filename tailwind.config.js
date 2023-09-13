@@ -35,6 +35,13 @@ export default {
         }
       }
     },
+    keyframes: {
+      open: {
+        '0%, 25%': { transformOrigin: 'top left', transform: 'scaleY(0)' },
+        '50%, 75%': { transformOrigin: 'top left', transform: 'scaleY(0.5)' },
+        '75%, 100%': { transformOrigin: 'top left', transform: 'scaleY(1)' }
+      }
+    }
   },
   plugins: [],
 }

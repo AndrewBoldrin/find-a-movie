@@ -45,7 +45,7 @@ export function TopBar() {
                         <img src={Hamburguer} alt="toggle menu" className='w-8 h-8 md:hidden'/>
                     </button>
                     {isToggleMenuOpen &&
-                        <div className='absolute left-0 bg-dark-contrast-dark rounded-sm'>
+                        <div className='absolute left-0 bg-dark-contrast-dark rounded-sm animate-[open_.5s_ease-in-out_1]'>
                             <ul className='flex flex-col'>
                                 <li className='w-full text-center px-6 py-3 text-zinc-300 active:bg-dark-contrast-light active:text-red-secondary'>Filmes</li>
                                 <li className='w-full text-center px-6 py-3 text-zinc-300 active:bg-dark-contrast-light active:text-red-secondary'>Series</li>
@@ -81,7 +81,7 @@ export function TopBar() {
 
                         </button>
                         {isMenuOpen && 
-                            <div className='min-w-8 absolute px-6 py-4 bg-dark-contrast-dark right-0 rounded-md'>
+                            <div className='min-w-8 absolute px-6 py-4 bg-dark-contrast-dark right-0 rounded-md animate-[open_.5s_ease-in-out_1]'>
                                 <ul className='flex flex-col justify-center'>
                                     <li className='block md:hidden border-b border-dark-contrast-light mb-4'>
                                         <p className='font-poppins text-zinc-300 font-extralight text-xs pb-1 whitespace-nowrap'>
