@@ -63,18 +63,25 @@ export function TopBar() {
                     :
                     <div className='relative'>
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='h-full flex items-center gap-6'>
-                            <p className='font-inter text-base'>{username}</p>
+                            <p className='hidden md:block font-inter text-base'>{username}</p>
                             {
                                 <img src={photo ? photo : UserCircle} alt="user avatar"  className='w-[2.5rem] h-[2.5rem] rounded-full stroke-white'/>
                             }
 
                         </button>
                         {isMenuOpen && 
-                            <div className='absolute px-6 py-4 bg-zinc-300 right-0 rounded-md'>
-                                <ul>
-                                    <button onClick={onLogout}>
-                                        <li className='text-black hover:text-red-secondary'>Logout</li>
-                                    </button>
+                            <div className='min-w-8 absolute px-6 py-4 bg-dark-contrast-dark right-0 rounded-md'>
+                                <ul className='flex flex-col justify-center'>
+                                    <li className='block md:hidden border-b border-dark-contrast-light mb-4'>
+                                        <p className='font-poppins text-zinc-300 font-extralight text-xs pb-1 whitespace-nowrap'>
+                                            {username}
+                                        </p>
+                                    </li>
+                                    <li className='text-zinc-300 hover:text-red-secondary'>
+                                        <button onClick={onLogout} className='w-full m-auto'>
+                                            Logout
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
                         }
