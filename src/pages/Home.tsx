@@ -1,18 +1,21 @@
-import { MovieCard } from '@/components/MovieCard'
+import { sectionList } from '@/api/Sections/sections'
+
 import { SearchBar } from '@/components/SearchBar'
+import { Section } from '@/components/Sections'
 import { TopBar } from '@/components/TopBar'
 
-
-
 export function Home() {
+
     return (
         <>
             <TopBar />
             <SearchBar />
 
-            <div className='w-[1170px] m-auto mt-16'>
-                <MovieCard />
-            </div> 
+            {
+                sectionList.map((section) => (
+                    <Section key={section.name} name={section.name} endpoint={section.endpoint}/>
+                ))
+            }
 
         </>
     )

@@ -9,13 +9,6 @@ export default {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif']
       },
-      fontSize: {
-        heading: {
-          1: '36px',
-          2: '28px',
-        },
-        subheading: '18px',
-      },
       colors: {
         orange: {
           primary: '#FF4017',
