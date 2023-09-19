@@ -23,15 +23,15 @@ export function Section({ name, endpoint, genresList }: Props) {
     }, [])
 
     return (
-        <section key={name} className='max-w-[1170px] w-full m-auto mt-16'>
+        <section key={name} className='max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12'>
             <h1 className='font-poppins font-medium text-[1.75rem] mb-6 text-center md:text-left'>{ name }</h1>
-                <div className='w-full grid grid-cols-1 place-items-center md:grid-cols-3 gap-x-[4.625rem] gap-y-4 md:gap-y-12'>
-                    {
-                        movies.map((movie: MovieDTO) => (
-                            <MovieCard key={movie.id} movie={movie} genresList={genresList}/>
-                        ))
-                    }
-                </div>
+            <div className='grid grid-cols-1 md:max-lg:grid-cols-2 lg:max-xl:grid-cols-3 xl:grid-cols-4 gap-x-14 xl:gap-6 place-items-center'>
+                {
+                    movies.map((movie: MovieDTO) => (
+                        <MovieCard key={movie.id} movie={movie} genresList={genresList}/>
+                    ))
+                }
+            </div>
         </section> 
     )
 }

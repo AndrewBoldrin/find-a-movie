@@ -17,8 +17,8 @@ export function MovieCard({ movie, genresList } : Props) {
     const POSTER_SIZE = 400
 
     return (
-        <div className='max-w-[21,375rem] w-full max-h-[16,875rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-8'>
-            <div className='w-full rounded-md overflow-hidden'>
+        <div className='w-full md:max-w-[18.75rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-12'>
+            <div className='w-full max-h-[16.875rem] h-full rounded-md overflow-hidden'>
                 {
                     movie.backdrop_path ?
                         <img src={`${API.baseImageURL}${POSTER_SIZE}${movie.backdrop_path}`} alt="imagem do filme" className='object-cover h-full' />
@@ -27,12 +27,12 @@ export function MovieCard({ movie, genresList } : Props) {
                 }
             </div>
             <div className='flex mt-4'>
-                <p className='flex-1 font-medium font-poppins text-lg '>{movie.title}</p>
+                <p className='flex-1 font-medium font-poppins text-lg truncate'>{movie.title}</p>
                 <div className='flex gap-3 items-center'>
                     <p className='font-light font-inter text-lg'>{movie.vote_average}</p>
                     <div className='relative group'>
                         <img src={OutlineStar} alt="icone de favoritos" className='hover:scale-125'/>
-                        <div className='hidden md:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300'>
+                        <div className='hidden lg:hidden 2xl:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300'>
                             <div className='absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-dark-contrast-dark'></div>
                             <p className='whitespace-nowrap font-light text-xs font-inter text-white text-opacity-50'>Adicionar aos favoritos</p>
                         </div>
