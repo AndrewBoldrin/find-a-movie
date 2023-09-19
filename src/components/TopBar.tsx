@@ -42,8 +42,8 @@ export function TopBar() {
         <div className="relative w-full h-[5rem] bg-dark-primary border-2 border-dark-secondary">
             <div className='w-full md:max-w-[73rem] h-full flex justify-between items-center px-8 md:px-0 md:m-auto'>
                 <div className='relative z-10'>
-                    <button className='w-8 h-8' onClick={toggleMenuNav}>
-                        <img src={Hamburguer} alt="toggle menu" className='w-8 h-8 md:hidden'/>
+                    <button className='w-8 h-8 md:hidden' onClick={toggleMenuNav}>
+                        <img src={Hamburguer} alt="toggle menu" className='w-8 h-8'/>
                     </button>
                     {isMenuNavOpen &&
                         <div className='absolute left-0 bg-dark-contrast-dark rounded-sm animate-[open_.5s_ease-in-out_1]'>
