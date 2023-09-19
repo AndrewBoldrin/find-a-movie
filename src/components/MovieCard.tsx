@@ -2,20 +2,24 @@ import DefaultMovie from '@/assets/DefaultMovie.png'
 import CalendarBlank from '@/assets/CalendarBlank.svg'
 import OutlineStar from '@/assets/OutlineStar.svg'
 import { MovieDTO } from '@/api/dto/movieDTO'
+import { GenreType } from '@/hooks/useGenres'
+import { formatMovieGenres } from '@/util/formatGenres'
 
 type Props = {
     movie: MovieDTO;
+    genresList: GenreType[]
 }
 
-export function MovieCard({ movie } : Props) {
+export function MovieCard({ movie, genresList } : Props) {
+    const genres = formatMovieGenres(genresList, movie.genre_ids)
 
     return (
         <div className='max-w-[342px] max-h-[270px] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-8'>
             <img src={DefaultMovie} alt="imagem do filme" />
             <div className='flex mt-4'>
-                <p className='flex-1 font-medium font-poppins text-lg '>Avengers</p>
+                <p className='flex-1 font-medium font-poppins text-lg '>{movie.title}</p>
                 <div className='flex gap-3 items-center'>
-                    <p className='font-light font-inter text-lg'>7.4</p>
+                    <p className='font-light font-inter text-lg'>{movie.vote_average}</p>
                     <div className='relative group'>
                         <img src={OutlineStar} alt="icone de favoritos" className='hover:scale-125'/>
                         <div className='hidden md:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300'>
@@ -28,11 +32,11 @@ export function MovieCard({ movie } : Props) {
 
             <div className='flex justify-between mt-4'>
                 <div className='flex gap-3'>
-                    <p className='font-inter font-thin text-xs mt-auto'>Ação, Comédia, Drama</p>
+                    <p className='font-inter font-thin text-xs mt-auto'>{genres}</p>
                 </div>
                 <div className='flex gap-3'>
                     <img src={CalendarBlank} alt="icone do calendário" />
-                    <p className='font-inter'>2018</p>
+                    <p className='font-inter'>{movie.release_date.split('-')[0]}</p>
                 </div>
             </div>
         </div> 
