@@ -1,9 +1,11 @@
-import DefaultMovie from '@/assets/DefaultMovie.png'
+import DefaultMovieImage from '@/assets/DefaultMovie.png'
 import CalendarBlank from '@/assets/CalendarBlank.svg'
 import OutlineStar from '@/assets/OutlineStar.svg'
 import { MovieDTO } from '@/api/dto/movieDTO'
 import { GenreType } from '@/hooks/useGenres'
 import { formatMovieGenres } from '@/util/formatGenres'
+
+import { API } from '@/api/config'
 
 type Props = {
     movie: MovieDTO;
@@ -12,10 +14,18 @@ type Props = {
 
 export function MovieCard({ movie, genresList } : Props) {
     const genres = formatMovieGenres(genresList, movie.genre_ids)
+    const POSTER_SIZE = 400
 
     return (
-        <div className='max-w-[342px] max-h-[270px] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-8'>
-            <img src={DefaultMovie} alt="imagem do filme" />
+        <div className='max-w-[21,375rem] w-full max-h-[16,875rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-8'>
+            <div className='w-full rounded-md overflow-hidden'>
+                {
+                    movie.backdrop_path ?
+                        <img src={`${API.baseImageURL}${POSTER_SIZE}${movie.backdrop_path}`} alt="imagem do filme" className='object-cover h-full' />
+                    :
+                        <img src={DefaultMovieImage} alt="imagem do filme" className='object-cover h-full' />
+                }
+            </div>
             <div className='flex mt-4'>
                 <p className='flex-1 font-medium font-poppins text-lg '>{movie.title}</p>
                 <div className='flex gap-3 items-center'>
