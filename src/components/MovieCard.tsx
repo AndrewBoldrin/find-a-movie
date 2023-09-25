@@ -21,15 +21,15 @@ export function MovieCard({ movie, genresList } : Props) {
             <div className='w-full max-h-[16.875rem] h-full rounded-md overflow-hidden'>
                 {
                     movie.backdrop_path ?
-                        <img src={`${API.baseImageURL}${POSTER_SIZE}${movie.backdrop_path}`} alt="imagem do filme" className='object-cover h-full' />
+                        <img src={`${API.baseImageURL}${POSTER_SIZE}${movie.backdrop_path}` ?? DefaultMovieImage} alt="imagem do filme" className='object-cover h-full' />
                     :
                         <img src={DefaultMovieImage} alt="imagem do filme" className='object-cover h-full' />
                 }
             </div>
-            <div className='flex mt-4'>
-                <p className='flex-1 font-medium font-poppins text-lg truncate'>{movie.title}</p>
+            <div className='flex mt-4 gap-2'>
+                <p className='flex-1 font-medium font-poppins text-lg truncate'>{movie.title ? movie.title : 'sem título'}</p>
                 <div className='flex gap-3 items-center'>
-                    <p className='font-light font-inter text-lg'>{movie.vote_average}</p>
+                    <p className='font-light font-inter text-lg'>{movie.vote_average ? movie.vote_average.toFixed(2) : '?'}</p>
                     <div className='relative group'>
                         <img src={OutlineStar} alt="icone de favoritos" className='hover:scale-125'/>
                         <div className='hidden lg:hidden 2xl:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300'>
@@ -42,11 +42,11 @@ export function MovieCard({ movie, genresList } : Props) {
 
             <div className='flex justify-between mt-4'>
                 <div className='flex gap-3'>
-                    <p className='font-inter font-thin text-xs mt-auto'>{genres}</p>
+                    <p className='font-inter font-thin text-xs mt-auto'>{genres ? genres : 'genero desconhecido'}</p>
                 </div>
                 <div className='flex gap-3'>
                     <img src={CalendarBlank} alt="icone do calendário" />
-                    <p className='font-inter'>{movie.release_date.split('-')[0]}</p>
+                    <p className='font-inter'>{movie.release_date ? movie.release_date.split('-')[0] : '????'}</p>
                 </div>
             </div>
         </div> 
