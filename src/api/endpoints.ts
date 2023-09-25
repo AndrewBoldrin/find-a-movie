@@ -1,7 +1,7 @@
 import { API } from './config'
 
 export function setQueryParams(page: number) {
-    return `?language=${API.language}&page=${page}`
+    return `language=${API.language}&page=${page}`
 }
 
 export const endpoints = Object.freeze({
