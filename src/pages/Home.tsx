@@ -1,22 +1,23 @@
-import { sectionList } from '@/api/Sections/sections'
+import { useState } from 'react'
 
 import { SearchBar } from '@/components/SearchBar'
-import { Section } from '@/components/Sections'
 import { TopBar } from '@/components/TopBar'
-import { useGenres } from '@/hooks/useGenres'
+import { Sections } from '@/components/Sections'
+import { SearchResults } from '@/components/SearchResults'
 
 export function Home() {
-    const { genresList } = useGenres()
+    const [searchInput, setSearchInput] = useState<null | string>('')
 
     return (
         <>
             <TopBar />
-            <SearchBar />
+            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput}/>
 
             {
-                sectionList.map((section) => (
-                    <Section key={section.name} name={section.name} endpoint={section.endpoint} genresList={genresList} />
-                ))
+                searchInput ?
+                <SearchResults searchInput={searchInput}/>
+                :
+                <Sections />
             }
 
         </>

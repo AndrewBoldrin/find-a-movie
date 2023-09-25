@@ -15,5 +15,8 @@ export const endpoints = Object.freeze({
     },
     movies: {
         movie: '/movie/',
+    },
+    search: {
+        movies: '/search/movie'
     }
 })
