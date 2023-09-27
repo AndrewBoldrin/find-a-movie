@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { MovieCard } from './MovieCard'
 
 import { useSearch } from '@/hooks/useSearch'
@@ -12,31 +11,8 @@ type Props = {
 }
 
 export function SearchResults({ searchInput }: Props) {
-    const { movies, nextPage } = useSearch( { searchInput: searchInput, endpoint: endpoints.search.movies})
+    const { movies } = useSearch( { searchInput: searchInput, endpoint: endpoints.search.movies})
     const { genresList } = useGenres()
-
-    // console.log(movies)
-
-    useEffect(() => {
-        function handleScroll() {
-            const pageHeight = document.body.clientHeight
-            const screenHeight = screen.height
-            const currentlyScrollY = window.scrollY
-
-            const maxScroll = pageHeight - screenHeight
-
-            if(currentlyScrollY >= maxScroll) {
-                console.log('getting next page')
-                nextPage()
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll)
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
 
     return (
         <section className='max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12'>
