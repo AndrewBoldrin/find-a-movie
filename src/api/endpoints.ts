@@ -15,8 +15,14 @@ export const endpoints = Object.freeze({
     },
     movies: {
         movie: '/movie/',
+        sections: {
+            popular: '/movie/popular',
+            top_rated: '/movie/top_rated',
+            upcoming: '/movie/upcoming',
+        },
     },
     search: {
-        movies: '/search/movie'
+        movies: '/search/movie',
+        tv: '/search/tv'
     }
 })

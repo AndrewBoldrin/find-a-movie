@@ -1,20 +1,20 @@
 import { endpoints, setQueryParams } from '../endpoints.ts'
 import { restClient } from '../restClient.ts'
 
-export const sectionList = [
-    {
+export const movieSections = {
+    popular: {
         name: 'Popular',
-        endpoint: endpoints.section.popular
+        endpoint: endpoints.movies.sections.popular
     },
-    {
+    top_rated: {
         name: 'Top Rated',
-        endpoint: endpoints.section.top_rated
+        endpoint: endpoints.movies.sections.top_rated
     },
-    {
+    upcoming: {
         name: 'Upcoming',
-        endpoint: endpoints.section.upcoming
+        endpoint: endpoints.movies.sections.upcoming
     },
-]
+}
 
 export async function getSection(section: string, page = 1) {
     const queryParams = setQueryParams(page)

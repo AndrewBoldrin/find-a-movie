@@ -5,13 +5,16 @@ import { useGenres } from '@/hooks/useGenres'
 
 import { endpoints } from '@/api/endpoints'
 import { MovieDTO } from '@/api/dto/movieDTO'
+import { useLocation } from 'react-router-dom'
 
 type Props = {
     searchInput: string
 }
 
 export function SearchResults({ searchInput }: Props) {
-    const { movies } = useSearch( { searchInput: searchInput, endpoint: endpoints.search.movies})
+    const { pathname } = useLocation()
+    const endpoint = pathname === '/' ? endpoints.search.movies : endpoints.search.tv
+    const { movies } = useSearch( { searchInput: searchInput, endpoint})
     const { genresList } = useGenres()
 
     return (

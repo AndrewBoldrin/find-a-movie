@@ -1,15 +1,22 @@
 import { Section } from './Section'
-import { sectionList } from '@/api/Sections/sections'
-
 import { useGenres } from '@/hooks/useGenres'
 
-export function Sections() {
+type SectionType = {
+    name: string
+    endpoint: string
+}
+
+type Props = {
+    sectionList: SectionType[]
+}
+
+export function Sections({ sectionList }: Props) {
     const { genresList } = useGenres()
 
     return (
         <>
             {
-                sectionList.map((section) => (
+                sectionList?.map((section) => (
                     <Section key={section.name} name={section.name} endpoint={section.endpoint} genresList={genresList} />
                 ))
             }
