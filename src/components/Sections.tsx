@@ -12,12 +12,13 @@ type Props = {
 
 export function Sections({ sectionList }: Props) {
     const { genresList } = useGenres()
+    const pagination: boolean = sectionList.length > 1 ? false : true
 
     return (
         <>
             {
                 sectionList?.map((section) => (
-                    <Section key={section.name} name={section.name} endpoint={section.endpoint} genresList={genresList} />
+                    <Section key={section.name} name={section.name} endpoint={section.endpoint} genresList={genresList} hasPagination={pagination} />
                 ))
             }
         </>

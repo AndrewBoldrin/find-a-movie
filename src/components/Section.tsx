@@ -1,37 +1,26 @@
-import { useEffect, useState } from 'react'
-
 import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
 import { MovieCard } from './MovieCard'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { getSection } from '@/api/Sections/sections'
 import { GenreType } from '@/hooks/useGenres'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useSections } from '@/hooks/useSections'
 
 type Props = {
     name: string,
     endpoint: string,
     genresList: GenreType[]
+    hasPagination: boolean
 }
 
-export function Section({ name, endpoint, genresList }: Props) {
-    const [movies, setMovies] = useState<MovieDTO[]>([])
+export function Section({ name, endpoint, genresList, hasPagination }: Props) {
+    const { movies } = useSections({ endpoint, hasPagination })
     const navigate = useNavigate()
     const { pathname } = useLocation()
-
-
-    async function getMoviesFromSection() {
-        const data = await getSection(endpoint)
-        setMovies(data)
-    }
 
     function handleSectionNavigation() {
         navigate(endpoint)
     }
-
-    useEffect(() => {
-        getMoviesFromSection()
-    }, [])
 
     return (
         <section key={name} className='max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12'>
