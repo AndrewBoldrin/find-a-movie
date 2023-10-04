@@ -2,11 +2,11 @@ import React from 'react'
 import Search from '@/assets/Search.svg'
 
 type Props = {
-    searchInput: string | null
-    setSearchInput: (text: string) => void
+    searchInput: string | null,
+    setSearchInput: (text: string | null) => void
 }
 
-export function SearchBar({ searchInput, setSearchInput}: Props) {
+export function SearchBar({ searchInput, setSearchInput }: Props) {
 
     return (
         <div className="max-w-[30rem] flex gap-4 mx-4 md:mx-auto mt-16 px-10 py-5 bg-dark-contrast-dark rounded-md shadow-lg hover:shadow-gray-700/50 focus-within:shadow-gray-700/50 transition ease-in-out delay-150">
