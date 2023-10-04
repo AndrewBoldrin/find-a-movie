@@ -2,7 +2,7 @@ import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
 import { MovieCard } from './MovieCard'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { GenreType } from '@/hooks/useGenres'
+import { GenreType } from '@/hooks/useMoviesGenres'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSections } from '@/hooks/useSections'
 

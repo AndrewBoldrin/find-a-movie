@@ -11,7 +11,8 @@ export const endpoints = Object.freeze({
         upcoming: '/movie/upcoming',
     },
     genre: {   
-        genres: '/genre/movie/list',
+        movies: '/genre/movie/list',
+        series: '/genre/tv/list',
     },
     movies: {
         movie: '/movie/',

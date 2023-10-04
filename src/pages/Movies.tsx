@@ -1,18 +1,9 @@
-import { useState } from 'react'
-import { MoviesSections } from '@/components/MoviesSections'
 import { SearchBar } from '@/components/SearchBar'
 import { SearchMoviesResults } from '@/components/SearchMoviesResults'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 
-type sectionListType = {
-    name: string
-    endpoint: string
-}
-
-type Props = {
-    sectionList: sectionListType[]
-}
-
-export function Home({ sectionList }: Props) {
+export function Movies() {
     const [searchInput, setSearchInput] = useState<null | string>('')
 
     return (
@@ -22,7 +13,7 @@ export function Home({ sectionList }: Props) {
                 searchInput ?
                 <SearchMoviesResults searchInput={searchInput}/>
                 :
-                <MoviesSections sectionList={sectionList}/>
+                <Outlet />
             }
         </>
     )

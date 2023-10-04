@@ -1,5 +1,5 @@
+import { useMoviesGenres } from '@/hooks/useMoviesGenres'
 import { Section } from './Section'
-import { useGenres } from '@/hooks/useGenres'
 
 type SectionType = {
     name: string
@@ -10,8 +10,8 @@ type Props = {
     sectionList: SectionType[]
 }
 
-export function Sections({ sectionList }: Props) {
-    const { genresList } = useGenres()
+export function MoviesSections({ sectionList }: Props) {
+    const { genresList } = useMoviesGenres()
     const pagination: boolean = sectionList.length > 1 ? false : true
 
     return (

@@ -1,21 +1,21 @@
-import { getMovieGenres } from '@/api/Genres/genres'
 import { useEffect, useState } from 'react'
+import { getSeriesGenres } from '@/api/Genres/seriesGenres'
 
 export type GenreType = {
     id: number,
     name: string
 }
 
-export function useGenres () {
+export function useSerieGenres () {
     const [genresList, setGenres] = useState<GenreType[]>([])
 
-    async function getWithGenres() {
-        const data = await getMovieGenres()
+    async function getGenres() {
+        const data = await getSeriesGenres()
         setGenres(data)
     }
 
     useEffect(() => {
-        getWithGenres()
+        getGenres()
     }, [])
 
     return {

@@ -1,21 +1,19 @@
 import { MovieCard } from './MovieCard'
 
 import { useSearch } from '@/hooks/useSearch'
-import { useGenres } from '@/hooks/useGenres'
+import { useMoviesGenres } from '@/hooks/useMoviesGenres'
 
 import { endpoints } from '@/api/endpoints'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { useLocation } from 'react-router-dom'
 
 type Props = {
     searchInput: string
 }
 
-export function SearchResults({ searchInput }: Props) {
-    const { pathname } = useLocation()
-    const endpoint = pathname === '/' ? endpoints.search.movies : endpoints.search.tv
+export function SearchMoviesResults({ searchInput }: Props) {
+    const endpoint = endpoints.search.movies
     const { movies } = useSearch( { searchInput: searchInput, endpoint})
-    const { genresList } = useGenres()
+    const { genresList } = useMoviesGenres()
 
     return (
         <section className='max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12'>
