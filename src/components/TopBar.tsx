@@ -6,12 +6,15 @@ import UserCircle from '@/assets/UserCircle.svg'
 import { UserContext, UserContextType } from '@/contexts/UserContextProvider'
 import { useGoogleAuthentication } from '@/hooks/useGoogleAuthentication'
 import { useToggleMenu } from '../hooks/useToggleMenu'
+import { useNavigate } from 'react-router-dom'
 
 export function TopBar() {
     const { isOpen: isMenuNavOpen, toggleMenu: toggleMenuNav } = useToggleMenu()
     const { isOpen: isMenuOpen, toggleMenu: toggleMenu } = useToggleMenu()
     const { isLogged, username, photo, setIsLogged, setUsername, setPhoto } = useContext(UserContext) as UserContextType
     const { auth, login, logout } = useGoogleAuthentication()
+
+    const navigate = useNavigate()
 
     async function onLogin() {
         const data = await login()
@@ -62,9 +65,9 @@ export function TopBar() {
                     <a href="">
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Filmes</li>
                     </a>
-                    <a href="">
+                    <button onClick={() => navigate('/series')}>
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Series</li>
-                    </a>
+                    </button>
                     <a href="">
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Favoritos</li>
                     </a>

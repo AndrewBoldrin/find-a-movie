@@ -5,22 +5,24 @@ export function setQueryParams(page: number) {
 }
 
 export const endpoints = Object.freeze({
-    section: {
-        popular: '/movie/popular',
-        top_rated: '/movie/top_rated',
-        upcoming: '/movie/upcoming',
-    },
     genre: {   
         movies: '/genre/movie/list',
         series: '/genre/tv/list',
     },
     movies: {
-        movie: '/movie/',
         sections: {
             popular: '/movie/popular',
             top_rated: '/movie/top_rated',
             upcoming: '/movie/upcoming',
         },
+    },
+    series: {
+        sections: {
+            airing_today: '/tv/airing_today' ,
+            on_the_air: '/tv/on_the_air',
+            popular: '/tv/popular',
+            top_rated: '/tv/top_rated'
+        }
     },
     search: {
         movies: '/search/movie',

@@ -1,10 +1,10 @@
 import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
-import { MovieCard } from './MovieCard'
+import { MovieCard } from '../card/MovieCard'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { GenreType } from '@/hooks/useMoviesGenres'
+import { GenreType } from '@/hooks/useGenres'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useSections } from '@/hooks/useSections'
+import { useMovieSections } from '@/hooks/useMovieSections'
 
 type Props = {
     name: string,
@@ -13,10 +13,12 @@ type Props = {
     hasPagination: boolean
 }
 
-export function Section({ name, endpoint, genresList, hasPagination }: Props) {
-    const { movies } = useSections({ endpoint, hasPagination })
+export function MovieSection({ name, endpoint, genresList, hasPagination }: Props) {
+    const { movies } = useMovieSections({ endpoint, hasPagination })
     const navigate = useNavigate()
     const { pathname } = useLocation()
+
+    console.log(movies)
 
     function handleSectionNavigation() {
         navigate(endpoint)
@@ -40,8 +42,8 @@ export function Section({ name, endpoint, genresList, hasPagination }: Props) {
             </div>
             <div className='grid grid-cols-1 md:max-lg:grid-cols-2 lg:max-xl:grid-cols-3 xl:grid-cols-4 gap-x-14 xl:gap-6 place-items-center'>
                 {
-                    movies.map((movie: MovieDTO) => (
-                        <MovieCard key={movie.id} movie={movie} genresList={genresList}/>
+                    movies?.map((show: MovieDTO) => (
+                        <MovieCard key={show.id} movie={show} genresList={genresList}/>
                     ))
                 }
             </div>

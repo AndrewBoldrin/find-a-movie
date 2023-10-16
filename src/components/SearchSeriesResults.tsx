@@ -1,4 +1,4 @@
-import { MovieCard } from './MovieCard'
+import { MovieCard } from './card/MovieCard'
 
 import { useSearch } from '@/hooks/useSearch'
 import { useSerieGenres } from '@/hooks/useSeriesGenres'

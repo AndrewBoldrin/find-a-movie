@@ -1,19 +1,20 @@
-import { MovieCard } from './MovieCard'
+import { MovieCard } from './card/MovieCard'
 
 import { useSearch } from '@/hooks/useSearch'
-import { useMoviesGenres } from '@/hooks/useMoviesGenres'
+import { useGenres } from '@/hooks/useGenres'
 
-import { endpoints } from '@/api/endpoints'
 import { MovieDTO } from '@/api/dto/movieDTO'
 
 type Props = {
     searchInput: string
+    type: 'MOVIE' | 'SERIE'
+    endpoint: string
 }
 
-export function SearchMoviesResults({ searchInput }: Props) {
-    const endpoint = endpoints.search.movies
+export function SearchResults({ searchInput, type, endpoint }: Props) {
+    // const endpoint = endpoints.search.movies
     const { movies } = useSearch( { searchInput: searchInput, endpoint})
-    const { genresList } = useMoviesGenres()
+    const { genresList } = useGenres({ type: type })
 
     return (
         <section className='max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12'>

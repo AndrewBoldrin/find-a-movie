@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { MoviesSections } from '@/components/MoviesSections'
+import { MovieSections } from '@/components/sections/MovieSections'
 import { SearchBar } from '@/components/SearchBar'
-import { SearchMoviesResults } from '@/components/SearchMoviesResults'
+import { SearchResults } from '@/components/SearchResults'
+import { endpoints } from '@/api/endpoints'
 
 type sectionListType = {
     name: string
@@ -20,9 +21,9 @@ export function Home({ sectionList }: Props) {
             <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
             {
                 searchInput ?
-                <SearchMoviesResults searchInput={searchInput}/>
+                <SearchResults searchInput={searchInput} type='MOVIE' endpoint={endpoints.search.movies} />
                 :
-                <MoviesSections sectionList={sectionList}/>
+                <MovieSections sectionList={sectionList}/>
             }
         </>
     )
