@@ -62,9 +62,9 @@ export function TopBar() {
                     <img src={LogoSvg} alt="logo" className='m-auto md:m-0 md:mr-[3.125rem]'/>
                 </div>
                 <ul className='hidden md:block md:flex-1 md:flex md:gap-14'>
-                    <a href="">
+                    <button onClick={() => navigate('/')}>
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Filmes</li>
-                    </a>
+                    </button>
                     <button onClick={() => navigate('/tv')}>
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Series</li>
                     </button>
