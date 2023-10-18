@@ -29,7 +29,7 @@ export function SerieSection({ name, endpoint, genresList, hasPagination }: Prop
             <div className='flex items-center mb-6'>
                 <h1 className='font-poppins font-medium text-[1.75rem] text-center md:text-left'>{ name }</h1>
                 {
-                pathname === '/' ?
+                pathname === '/tv' ?
                     <button onClick={handleSectionNavigation} className='flex items-center gap-1 hover:gap-2 ml-6 text-sm font-light hover:text-zinc-400 transition-all ease-in-out duration-150'>ver mais
                         <img src={ArrowRight} alt="icone seta para direita" className='w-3 h-3'/> 
                     </button>

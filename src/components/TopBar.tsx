@@ -65,7 +65,7 @@ export function TopBar() {
                     <a href="">
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Filmes</li>
                     </a>
-                    <button onClick={() => navigate('/series')}>
+                    <button onClick={() => navigate('/tv')}>
                         <li className='font-poppins hover:text-red-primary transition ease-in-out delay-75'>Series</li>
                     </button>
                     <a href="">
