@@ -5,26 +5,29 @@ import { SearchResults } from '@/components/SearchResults'
 import { endpoints } from '@/api/endpoints'
 
 type sectionListType = {
-    name: string
-    endpoint: string
+  name: string
+  endpoint: string
 }
 
 type Props = {
-    sectionList: sectionListType[]
+  sectionList: sectionListType[]
 }
 
 export function Home({ sectionList }: Props) {
-    const [searchInput, setSearchInput] = useState<null | string>('')
+  const [searchInput, setSearchInput] = useState<null | string>('')
 
-    return (
-        <>
-            <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
-            {
-                searchInput ?
-                <SearchResults searchInput={searchInput} type='MOVIE' endpoint={endpoints.search.movies} />
-                :
-                <MovieSections sectionList={sectionList}/>
-            }
-        </>
-    )
+  return (
+    <>
+      <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
+      {searchInput ? (
+        <SearchResults
+          searchInput={searchInput}
+          type="MOVIE"
+          endpoint={endpoints.search.movies}
+        />
+      ) : (
+        <MovieSections sectionList={sectionList} />
+      )}
+    </>
+  )
 }
