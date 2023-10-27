@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif']
+        poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
         orange: {
@@ -24,17 +21,21 @@ export default {
           contrast: {
             dark: '#3E3F48',
             light: '#51535C',
-          }
-        }
-      }
+          },
+        },
+      },
     },
     keyframes: {
       open: {
         '0%, 25%': { transformOrigin: 'top left', transform: 'scaleY(0)' },
         '50%, 75%': { transformOrigin: 'top left', transform: 'scaleY(0.5)' },
-        '75%, 100%': { transformOrigin: 'top left', transform: 'scaleY(1)' }
-      }
-    }
+        '75%, 100%': { transformOrigin: 'top left', transform: 'scaleY(1)' },
+      },
+      spin: {
+        from: { transform: 'rotate(0deg)' },
+        to: { transform: 'rotate(360deg)' },
+      },
+    },
   },
   plugins: [],
 }

@@ -1,5 +1,5 @@
 import { getSection } from '@/api/Sections/sections'
-import { SerieDTO } from '@/api/dto/serieDTO'
+import { MovieDTO } from '@/api/dto/movieDTO'
 import { useEffect, useState } from 'react'
 
 type Props = {
@@ -7,20 +7,23 @@ type Props = {
   hasPagination: boolean
 }
 
-export function useSeriesSections({ endpoint, hasPagination }: Props) {
-  const [series, setSeries] = useState<SerieDTO[]>([])
+export function useMovieSection({ endpoint, hasPagination }: Props) {
+  const [movies, setMovies] = useState<MovieDTO[]>([])
   const [page, setPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
 
   let timeout: NodeJS.Timeout | null = null
 
   async function getFirstPage() {
     const data = await getSection(endpoint)
-    setSeries(data)
+    setMovies(data)
   }
 
   async function getNextPage() {
+    setIsLoading(true)
     const data = await getSection(endpoint, page)
-    setSeries([...series, ...data])
+    setMovies([...movies, ...data])
+    setIsLoading(false)
   }
 
   function nextPage() {
@@ -65,6 +68,7 @@ export function useSeriesSections({ endpoint, hasPagination }: Props) {
   }, [page])
 
   return {
-    series,
+    movies,
+    isLoading,
   }
 }

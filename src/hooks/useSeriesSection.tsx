@@ -7,9 +7,10 @@ type Props = {
   hasPagination: boolean
 }
 
-export function useSeriesSections({ endpoint, hasPagination }: Props) {
+export function useSerieSection({ endpoint, hasPagination }: Props) {
   const [series, setSeries] = useState<SerieDTO[]>([])
   const [page, setPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
 
   let timeout: NodeJS.Timeout | null = null
 
@@ -19,8 +20,10 @@ export function useSeriesSections({ endpoint, hasPagination }: Props) {
   }
 
   async function getNextPage() {
+    setIsLoading(true)
     const data = await getSection(endpoint, page)
     setSeries([...series, ...data])
+    setIsLoading(false)
   }
 
   function nextPage() {
@@ -66,5 +69,6 @@ export function useSeriesSections({ endpoint, hasPagination }: Props) {
 
   return {
     series,
+    isLoading,
   }
 }

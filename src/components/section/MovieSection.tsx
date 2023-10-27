@@ -3,8 +3,9 @@ import ArrowLeft from '@/assets/ArrowLeft.svg'
 import { MovieCard } from '../card/MovieCard'
 import { MovieDTO } from '@/api/dto/movieDTO'
 import { useNavigate, useLocation, useOutletContext } from 'react-router-dom'
-import { useMovieSections } from '@/hooks/useMovieSections'
+import { useMovieSection } from '@/hooks/useMovieSection'
 import { GenreType } from '@/hooks/useGenres'
+import { Loading } from '../Loading'
 
 type SectionType = {
   name: string
@@ -19,7 +20,7 @@ type Props = {
 export function MovieSection({ section, hasPagination }: Props) {
   const { name, endpoint } = section
   const genresList: GenreType[] = useOutletContext()
-  const { movies } = useMovieSections({ endpoint, hasPagination })
+  const { movies, isLoading } = useMovieSection({ endpoint, hasPagination })
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -30,7 +31,7 @@ export function MovieSection({ section, hasPagination }: Props) {
   return (
     <section
       key={name}
-      className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12"
+      className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12 pb-48"
     >
       <div className="flex items-center mb-6">
         <h1 className="font-poppins font-medium text-[1.75rem] text-center md:text-left">
@@ -66,6 +67,7 @@ export function MovieSection({ section, hasPagination }: Props) {
         {movies?.map((show: MovieDTO) => (
           <MovieCard key={show.id} movie={show} genresList={genresList} />
         ))}
+        <Loading isLoading={isLoading} />
       </div>
     </section>
   )

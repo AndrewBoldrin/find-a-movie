@@ -4,7 +4,8 @@ import { GenreType } from '@/hooks/useGenres'
 import { useNavigate, useLocation, useOutletContext } from 'react-router-dom'
 import { SerieDTO } from '@/api/dto/serieDTO'
 import { SerieCard } from '../card/SerieCard'
-import { useSeriesSections } from '@/hooks/useSeriesSections'
+import { useSerieSection } from '@/hooks/useSeriesSection'
+import { Loading } from '../Loading'
 
 type SectionType = {
   name: string
@@ -18,7 +19,7 @@ type Props = {
 
 export function SerieSection({ section, hasPagination }: Props) {
   const { name, endpoint } = section
-  const { series } = useSeriesSections({ endpoint, hasPagination })
+  const { series, isLoading } = useSerieSection({ endpoint, hasPagination })
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -33,7 +34,7 @@ export function SerieSection({ section, hasPagination }: Props) {
   return (
     <section
       key={name}
-      className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12"
+      className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12 pb-48"
     >
       <div className="flex items-center mb-6">
         <h1 className="font-poppins font-medium text-[1.75rem] text-center md:text-left">
@@ -69,6 +70,7 @@ export function SerieSection({ section, hasPagination }: Props) {
         {series.map((serie: SerieDTO) => (
           <SerieCard key={serie.id} serie={serie} genresList={genresList} />
         ))}
+        <Loading isLoading={isLoading} />
       </div>
     </section>
   )
