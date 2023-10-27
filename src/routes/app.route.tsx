@@ -1,7 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import { Home } from '@/pages/Home'
-import { movieSections } from '@/api/Sections/sections'
 import { Layout } from '@/components/core/Layout'
 import { Movies } from '@/pages/Movies'
 import { MovieSections } from '@/components/sections/MovieSections'
@@ -9,16 +7,15 @@ import { SerieSections } from '@/components/sections/SerieSections'
 import { Series } from '@/pages/Series'
 import { SerieSection } from '@/components/section/SerieSection'
 import { SectionType, seriesSections } from '@/api/Sections/seriesSections'
+import { movieSections } from '@/api/Sections/moviesSections'
+import { MovieSection } from '@/components/section/MovieSection'
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route
-            index
-            element={<Home sectionList={Object.values(movieSections)} />}
-          />
+          <Route index element={<Navigate replace to="/movie" />} />
           <Route path="movie" element={<Movies />}>
             <Route
               index
@@ -26,20 +23,15 @@ export function AppRouter() {
                 <MovieSections sectionList={Object.values(movieSections)} />
               }
             />
-            <Route
-              path="popular"
-              element={<MovieSections sectionList={[movieSections.popular]} />}
-            />
-            <Route
-              path="top_rated"
-              element={
-                <MovieSections sectionList={[movieSections.top_rated]} />
-              }
-            />
-            <Route
-              path="upcoming"
-              element={<MovieSections sectionList={[movieSections.upcoming]} />}
-            />
+            {Object.values(movieSections).map((section) => {
+              return (
+                <Route
+                  key={section.name}
+                  path={section.path}
+                  element={<MovieSection section={section} hasPagination />}
+                />
+              )
+            })}
           </Route>
           <Route path="tv" element={<Series />}>
             <Route

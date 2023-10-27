@@ -1,11 +1,13 @@
 import { endpoints } from '@/api/endpoints'
 import { SearchBar } from '@/components/SearchBar'
 import { SearchResults } from '@/components/SearchResults'
+import { useGenres } from '@/hooks/useGenres'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 export function Movies() {
   const [searchInput, setSearchInput] = useState<null | string>('')
+  const { genresList } = useGenres({ type: 'MOVIE' })
 
   return (
     <>
@@ -17,7 +19,7 @@ export function Movies() {
           endpoint={endpoints.search.movies}
         />
       ) : (
-        <Outlet />
+        <Outlet context={genresList} />
       )}
     </>
   )

@@ -2,28 +2,26 @@ import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
 import { MovieCard } from '../card/MovieCard'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { GenreType } from '@/hooks/useGenres'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useOutletContext } from 'react-router-dom'
 import { useMovieSections } from '@/hooks/useMovieSections'
+import { GenreType } from '@/hooks/useGenres'
 
-type Props = {
+type SectionType = {
   name: string
   endpoint: string
-  genresList: GenreType[]
+}
+
+type Props = {
+  section: SectionType
   hasPagination: boolean
 }
 
-export function MovieSection({
-  name,
-  endpoint,
-  genresList,
-  hasPagination,
-}: Props) {
+export function MovieSection({ section, hasPagination }: Props) {
+  const { name, endpoint } = section
+  const genresList: GenreType[] = useOutletContext()
   const { movies } = useMovieSections({ endpoint, hasPagination })
   const navigate = useNavigate()
   const { pathname } = useLocation()
-
-  console.log(movies)
 
   function handleSectionNavigation() {
     navigate(endpoint)
@@ -38,7 +36,7 @@ export function MovieSection({
         <h1 className="font-poppins font-medium text-[1.75rem] text-center md:text-left">
           {name}
         </h1>
-        {pathname === '/' ? (
+        {pathname === '/movie' ? (
           <button
             onClick={handleSectionNavigation}
             className="flex items-center gap-1 hover:gap-2 ml-6 text-sm font-light hover:text-zinc-400 transition-all ease-in-out duration-150"
