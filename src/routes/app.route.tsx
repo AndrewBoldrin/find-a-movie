@@ -1,12 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Home } from '@/pages/Home'
-import { movieSections, seriesSections } from '@/api/Sections/sections'
+import { movieSections } from '@/api/Sections/sections'
 import { Layout } from '@/components/core/Layout'
 import { Movies } from '@/pages/Movies'
 import { MovieSections } from '@/components/sections/MovieSections'
 import { SerieSections } from '@/components/sections/SerieSections'
 import { Series } from '@/pages/Series'
+import { SerieSection } from '@/components/section/SerieSection'
+import { SectionType, seriesSections } from '@/api/Sections/seriesSections'
 
 export function AppRouter() {
   return (
@@ -46,28 +48,15 @@ export function AppRouter() {
                 <SerieSections sectionList={Object.values(seriesSections)} />
               }
             />
-            <Route
-              path="airing_today"
-              element={
-                <SerieSections sectionList={[seriesSections.airing_today]} />
-              }
-            />
-            <Route
-              path="on_the_air"
-              element={
-                <SerieSections sectionList={[seriesSections.on_the_air]} />
-              }
-            />
-            <Route
-              path="popular"
-              element={<SerieSections sectionList={[seriesSections.popular]} />}
-            />
-            <Route
-              path="top_rated"
-              element={
-                <SerieSections sectionList={[seriesSections.top_rated]} />
-              }
-            />
+            {Object.values(seriesSections).map((section: SectionType) => {
+              return (
+                <Route
+                  key={section.name}
+                  path={section.path}
+                  element={<SerieSection section={section} hasPagination />}
+                />
+              )
+            })}
           </Route>
         </Route>
       </Routes>

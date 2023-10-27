@@ -1,4 +1,3 @@
-import { useGenres } from '@/hooks/useGenres'
 import { SerieSection } from '../section/SerieSection'
 
 type SectionType = {
@@ -8,20 +7,17 @@ type SectionType = {
 
 type Props = {
   sectionList: SectionType[]
+  hasPagination?: boolean
 }
 
-export function SerieSections({ sectionList }: Props) {
-  const { genresList } = useGenres({ type: 'SERIE' })
-
+export function SerieSections({ sectionList, hasPagination = false }: Props) {
   return (
     <>
       {sectionList?.map((section) => (
         <SerieSection
           key={section.name}
-          name={section.name}
-          endpoint={section.endpoint}
-          genresList={genresList}
-          hasPagination={false}
+          section={section}
+          hasPagination={hasPagination}
         />
       ))}
     </>

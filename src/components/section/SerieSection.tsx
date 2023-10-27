@@ -1,27 +1,28 @@
 import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
 import { GenreType } from '@/hooks/useGenres'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useOutletContext } from 'react-router-dom'
 import { SerieDTO } from '@/api/dto/serieDTO'
 import { SerieCard } from '../card/SerieCard'
-import { useSeriesSections } from '@/hooks/useSeriesSection'
+import { useSeriesSections } from '@/hooks/useSeriesSections'
 
-type Props = {
+type SectionType = {
   name: string
   endpoint: string
-  genresList: GenreType[]
+}
+
+type Props = {
+  section: SectionType
   hasPagination: boolean
 }
 
-export function SerieSection({
-  name,
-  endpoint,
-  genresList,
-  hasPagination,
-}: Props) {
+export function SerieSection({ section, hasPagination }: Props) {
+  const { name, endpoint } = section
   const { series } = useSeriesSections({ endpoint, hasPagination })
   const navigate = useNavigate()
   const { pathname } = useLocation()
+
+  const genresList: GenreType[] = useOutletContext()
 
   console.log(series)
 
