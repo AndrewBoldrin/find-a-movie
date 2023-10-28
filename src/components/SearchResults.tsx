@@ -4,6 +4,7 @@ import { useSearch } from '@/hooks/useSearch'
 import { useGenres } from '@/hooks/useGenres'
 
 import { MovieDTO } from '@/api/dto/movieDTO'
+import { Loading } from './Loading'
 
 type Props = {
   searchInput: string
@@ -12,8 +13,7 @@ type Props = {
 }
 
 export function SearchResults({ searchInput, type, endpoint }: Props) {
-  // const endpoint = endpoints.search.movies
-  const { movies } = useSearch({ searchInput, endpoint })
+  const { movies, isLoading } = useSearch({ searchInput, endpoint })
   const { genresList } = useGenres({ type })
 
   return (
@@ -29,6 +29,7 @@ export function SearchResults({ searchInput, type, endpoint }: Props) {
         ) : (
           <>nenhum resultado encontrado</>
         )}
+        {isLoading && <Loading isLoading={isLoading} />}
       </div>
     </section>
   )

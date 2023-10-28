@@ -11,6 +11,7 @@ type Props = {
 export function useSearch({ searchInput, endpoint }: Props) {
   const [movies, setMovies] = useState<MovieDTO[]>([])
   const [page, setPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
 
   let timeout: NodeJS.Timeout | null = null
 
@@ -23,8 +24,10 @@ export function useSearch({ searchInput, endpoint }: Props) {
 
   async function getNextPage() {
     if (searchInput) {
+      setIsLoading(true)
       const data = await searchByName(searchInput ?? '', endpoint, page)
       setMovies([...movies, ...data])
+      setIsLoading(false)
     }
   }
 
@@ -81,5 +84,6 @@ export function useSearch({ searchInput, endpoint }: Props) {
 
   return {
     movies,
+    isLoading,
   }
 }
