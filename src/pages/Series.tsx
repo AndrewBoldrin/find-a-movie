@@ -16,7 +16,7 @@ export function Series() {
       {searchInput ? (
         <SearchSeriesResults searchInput={searchInput} />
       ) : (
-        <Outlet context={[genresList]} />
+        <Outlet context={genresList} />
       )}
     </>
   )

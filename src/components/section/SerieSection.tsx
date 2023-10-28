@@ -25,8 +25,6 @@ export function SerieSection({ section, hasPagination }: Props) {
 
   const genresList: GenreType[] = useOutletContext()
 
-  console.log(series)
-
   function handleSectionNavigation() {
     navigate(endpoint)
   }
