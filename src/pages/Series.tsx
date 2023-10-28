@@ -1,9 +1,10 @@
-import { endpoints } from '@/api/endpoints'
-import { SearchBar } from '@/components/SearchBar'
-import { SearchResults } from '@/components/SearchResults'
-import { useGenres } from '@/hooks/useGenres'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+
+import { SearchBar } from '@/components/SearchBar'
+import { useGenres } from '@/hooks/useGenres'
+
+import { SearchSeriesResults } from '@/components/SearchSeriesResults'
 
 export function Series() {
   const { genresList } = useGenres({ type: 'SERIE' })
@@ -13,11 +14,7 @@ export function Series() {
     <>
       <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
       {searchInput ? (
-        <SearchResults
-          searchInput={searchInput}
-          type="SERIE"
-          endpoint={endpoints.search.tv}
-        />
+        <SearchSeriesResults searchInput={searchInput} />
       ) : (
         <Outlet context={[genresList]} />
       )}

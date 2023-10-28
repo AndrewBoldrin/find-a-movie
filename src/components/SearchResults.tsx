@@ -4,17 +4,17 @@ import { useSearch } from '@/hooks/useSearch'
 import { useGenres } from '@/hooks/useGenres'
 
 import { MovieDTO } from '@/api/dto/movieDTO'
+import { endpoints } from '@/api/endpoints'
 import { Loading } from './Loading'
 
 type Props = {
   searchInput: string
-  type: 'MOVIE' | 'SERIE'
-  endpoint: string
 }
 
-export function SearchResults({ searchInput, type, endpoint }: Props) {
+export function SearchResults({ searchInput }: Props) {
+  const endpoint = endpoints.search.movies
   const { movies, isLoading } = useSearch({ searchInput, endpoint })
-  const { genresList } = useGenres({ type })
+  const { genresList } = useGenres({ type: 'MOVIE' })
 
   return (
     <section className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12">
