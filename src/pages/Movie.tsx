@@ -41,7 +41,7 @@ export function Movie() {
           className="w-full md:max-h-[40rem] sm:max-h-[30rem] max-h-[20rem] h-full object-cover object-top"
         />
         <div className="lg:absolute inset-0 bg-gradient-to-r from-black"></div>
-        <div className="lg:absolute w-full mt-8 xs:mt-0 lg:max-w-[82.5rem] m-auto left-0 right-0 bottom-48 md:max-xl:px-12 px-4 sm:max-md:px-0">
+        <div className="lg:absolute w-full mt-8 xs:mt-0 lg:max-w-[82.5rem] m-auto left-0 right-0 bottom-24 md:max-xl:px-12 px-4 sm:max-md:px-0">
           <button
             onClick={handleGoBack}
             className="flex items-center gap-4 hover:text-zinc-50 mb-12 rounded-lg"
