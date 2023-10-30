@@ -1,7 +1,13 @@
+export type GenreType = {
+  id: number
+  name: string
+}
+
 export type SerieDTO = {
   backdrop_path: string
   first_air_date: string
   genre_ids: number[]
+  genres: GenreType[]
   id: number
   name: string
   origin_country: string[]

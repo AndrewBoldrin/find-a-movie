@@ -6,6 +6,7 @@ import { formatMovieGenres } from '@/util/formatGenres'
 
 import { API } from '@/api/config'
 import { SerieDTO } from '@/api/dto/serieDTO'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   serie: SerieDTO
@@ -16,26 +17,34 @@ export function SerieCard({ serie, genresList }: Props) {
   const genres = formatMovieGenres(genresList, serie.genre_ids)
   const POSTER_SIZE = 400
 
+  const navigate = useNavigate()
+
+  function handleSerieNavigation() {
+    navigate(`/tv/${serie.id}`)
+  }
+
   return (
     <div className="w-full md:max-w-[18.75rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-12">
-      <div className="w-full max-h-[16.875rem] h-full rounded-md overflow-hidden">
-        {serie.backdrop_path ? (
-          <img
-            src={
-              `${API.baseImageURL}${POSTER_SIZE}${serie.backdrop_path}` ??
-              DefaultMovieImage
-            }
-            alt="imagem do filme"
-            className="object-cover h-full"
-          />
-        ) : (
-          <img
-            src={DefaultMovieImage}
-            alt="imagem do filme"
-            className="object-cover h-full"
-          />
-        )}
-      </div>
+      <button onClick={handleSerieNavigation}>
+        <div className="w-full max-h-[16.875rem] h-full rounded-md overflow-hidden">
+          {serie.backdrop_path ? (
+            <img
+              src={
+                `${API.baseImageURL}${POSTER_SIZE}${serie.backdrop_path}` ??
+                DefaultMovieImage
+              }
+              alt="imagem do filme"
+              className="object-cover h-full"
+            />
+          ) : (
+            <img
+              src={DefaultMovieImage}
+              alt="imagem do filme"
+              className="object-cover h-full"
+            />
+          )}
+        </div>
+      </button>
       <div className="flex mt-4 gap-2">
         <p className="flex-1 font-medium font-poppins text-lg truncate">
           {serie.name ? serie.name : 'sem título'}

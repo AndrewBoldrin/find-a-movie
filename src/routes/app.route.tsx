@@ -10,6 +10,7 @@ import { SectionType, seriesSections } from '@/api/Sections/seriesSections'
 import { movieSections } from '@/api/Sections/moviesSections'
 import { MovieSection } from '@/components/section/MovieSection'
 import { Movie } from '@/pages/Movie'
+import { Serie } from '@/pages/Serie'
 
 export function AppRouter() {
   return (
@@ -51,6 +52,7 @@ export function AppRouter() {
                 />
               )
             })}
+            <Route path=":id" element={<Serie />} />
           </Route>
         </Route>
       </Routes>
