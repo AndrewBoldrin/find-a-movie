@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useMovie } from '@/hooks/useMovie'
 
 import { API } from '@/api/config'
 
 import DefaultMovieImage from '@/assets/DefaultMovie.png'
+import ArrowLeftIcon from '@/assets/ArrowLeft.svg'
 import PlusIcon from '@/assets/Plus.svg'
 import StarIcon from '@/assets/Star.svg'
 import { GenreType } from '@/api/dto/movieDTO'
@@ -11,6 +12,12 @@ import { GenreType } from '@/api/dto/movieDTO'
 export function Movie() {
   const { id } = useParams()
   const { movie } = useMovie({ id })
+
+  const navigate = useNavigate()
+
+  function handleGoBack() {
+    navigate(-1)
+  }
 
   if (!movie)
     return (
@@ -35,6 +42,17 @@ export function Movie() {
         />
         <div className="lg:absolute inset-0 bg-gradient-to-r from-black"></div>
         <div className="lg:absolute w-full mt-8 xs:mt-0 lg:max-w-[82.5rem] m-auto left-0 right-0 bottom-48 md:max-xl:px-12 px-4 sm:max-md:px-0">
+          <button
+            onClick={handleGoBack}
+            className="flex items-center gap-4 hover:text-zinc-50 mb-12 rounded-lg"
+          >
+            <img
+              src={ArrowLeftIcon}
+              alt="botao de voltar"
+              className="lg:w-6 lg:h-6 w-4 h-5"
+            />
+            voltar
+          </button>
           <div className="flex items-center lg:gap-12 max-lg:justify-between">
             <h1 className="font-bold font-poppins lg:text-4xl md:text-2xl text-xl text-white">
               {movie?.title}
