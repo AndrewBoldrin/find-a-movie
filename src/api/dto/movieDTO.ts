@@ -1,6 +1,12 @@
+export type GenreType = {
+  id: number
+  name: string
+}
+
 export type MovieDTO = {
   adult: boolean
   backdrop_path: string
+  genres?: GenreType[]
   genre_ids: number[]
   id: number
   original_language: string

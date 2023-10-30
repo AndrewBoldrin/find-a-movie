@@ -10,6 +10,7 @@ export const endpoints = Object.freeze({
     series: '/genre/tv/list',
   },
   movies: {
+    movie: '/movie',
     sections: {
       popular: '/movie/popular',
       top_rated: '/movie/top_rated',
