@@ -8,15 +8,16 @@ import ArrowLeftIcon from '@/assets/ArrowLeft.svg'
 import PlusIcon from '@/assets/Plus.svg'
 import StarIcon from '@/assets/Star.svg'
 import { GenreType } from '@/api/dto/movieDTO'
+import { MovieSection } from '@/components/section/MovieSection'
+import { endpoints } from '@/api/endpoints'
 
 export function Movie() {
   const { id } = useParams()
   const { movie } = useMovie({ id })
-
   const navigate = useNavigate()
 
   function handleGoBack() {
-    navigate(-1)
+    navigate('/movie')
   }
 
   if (!movie)
@@ -78,6 +79,14 @@ export function Movie() {
           </button>
         </div>
       </div>
+
+      <MovieSection
+        section={{
+          name: 'Títulos similares',
+          endpoint: endpoints.movies.similar(id ?? ''),
+        }}
+        hasPagination={false}
+      />
     </div>
   )
 }

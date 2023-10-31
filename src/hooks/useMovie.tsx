@@ -15,8 +15,9 @@ export function useMovie({ id }: Props) {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     handleGetMovie()
-  }, [])
+  }, [id])
 
   return { movie }
 }

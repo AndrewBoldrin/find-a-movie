@@ -11,6 +11,7 @@ export const endpoints = Object.freeze({
   },
   movies: {
     movie: '/movie',
+    similar: (id: string) => `/movie/${id}/similar?language=${API.language}`,
     sections: {
       popular: '/movie/popular',
       top_rated: '/movie/top_rated',
