@@ -15,8 +15,9 @@ export function useSerie({ id }: Props) {
   }
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     handleGetSerie()
-  }, [])
+  }, [id])
 
   return { serie }
 }

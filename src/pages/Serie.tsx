@@ -8,6 +8,8 @@ import PlusIcon from '@/assets/Plus.svg'
 import StarIcon from '@/assets/Star.svg'
 import { GenreType } from '@/api/dto/movieDTO'
 import { useSerie } from '@/hooks/useSerie'
+import { endpoints } from '@/api/endpoints'
+import { SerieSection } from '@/components/section/SerieSection'
 
 export function Serie() {
   const { id } = useParams()
@@ -16,7 +18,7 @@ export function Serie() {
   const navigate = useNavigate()
 
   function handleGoBack() {
-    navigate(-1)
+    navigate('/tv')
   }
 
   if (!serie)
@@ -78,6 +80,13 @@ export function Serie() {
           </button>
         </div>
       </div>
+      <SerieSection
+        section={{
+          name: 'Títulos similares',
+          endpoint: endpoints.series.similar(id ?? ''),
+        }}
+        hasPagination={false}
+      />
     </div>
   )
 }

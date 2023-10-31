@@ -20,6 +20,7 @@ export const endpoints = Object.freeze({
   },
   series: {
     serie: '/tv',
+    similar: (id: string) => `/tv/${id}/similar?language=${API.language}`,
     sections: {
       airing_today: '/tv/airing_today',
       on_the_air: '/tv/on_the_air',
