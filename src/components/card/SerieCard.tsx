@@ -1,27 +1,32 @@
 import DefaultMovieImage from '@/assets/DefaultMovie.png'
 import CalendarBlank from '@/assets/CalendarBlank.svg'
 import OutlineStar from '@/assets/OutlineStar.svg'
+import StarIcon from '@/assets/Star.svg'
 import { GenreType } from '@/hooks/useGenres'
 import { formatMovieGenres } from '@/util/formatGenres'
 
 import { API } from '@/api/config'
 import { SerieDTO } from '@/api/dto/serieDTO'
-import { useNavigate } from 'react-router-dom'
+import { useSerieCard } from '@/hooks/useSerieCard'
 
 type Props = {
   serie: SerieDTO
   genresList: GenreType[]
 }
 
+const POSTER_SIZE = 400
+
 export function SerieCard({ serie, genresList }: Props) {
+  const {
+    isInFavorites,
+    isLogged,
+    handleSerieNavigation,
+    handleFavoritesClick,
+  } = useSerieCard({
+    id: serie.id,
+    title: serie.name,
+  })
   const genres = formatMovieGenres(genresList, serie.genre_ids)
-  const POSTER_SIZE = 400
-
-  const navigate = useNavigate()
-
-  function handleSerieNavigation() {
-    navigate(`/tv/${serie.id}`)
-  }
 
   return (
     <div className="w-full md:max-w-[18.75rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-12">
@@ -54,15 +59,19 @@ export function SerieCard({ serie, genresList }: Props) {
             {serie.vote_average ? serie.vote_average.toFixed(2) : '?'}
           </p>
           <div className="relative group">
-            <img
-              src={OutlineStar}
-              alt="icone de favoritos"
-              className="hover:scale-125"
-            />
+            <button onClick={handleFavoritesClick}>
+              <img
+                src={!isInFavorites || !isLogged ? OutlineStar : StarIcon}
+                alt="icone de favoritos"
+                className="hover:scale-125"
+              />
+            </button>
             <div className="hidden lg:hidden 2xl:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300">
               <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-dark-contrast-dark"></div>
               <p className="whitespace-nowrap font-light text-xs font-inter text-white text-opacity-50">
-                Adicionar aos favoritos
+                {isInFavorites
+                  ? 'Remover dos favoritos'
+                  : 'Adicionar aos favoritos'}
               </p>
             </div>
           </div>
