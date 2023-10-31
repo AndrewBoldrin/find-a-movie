@@ -7,98 +7,26 @@ import { GenreType } from '@/hooks/useGenres'
 import { formatMovieGenres } from '@/util/formatGenres'
 
 import { API } from '@/api/config'
-import { useNavigate } from 'react-router-dom'
-
-import { getDatabase, onValue, ref, remove, update } from 'firebase/database'
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import { useContext, useEffect, useState } from 'react'
-import { UserContext, UserContextType } from '@/contexts/UserContextProvider'
+import { useMovieCard } from '@/hooks/useMovieCard'
 
 type Props = {
   movie: MovieDTO
   genresList: GenreType[]
 }
 
+const POSTER_SIZE = 400
+
 export function MovieCard({ movie, genresList }: Props) {
+  const {
+    isInFavorites,
+    isLogged,
+    handleMovieNavigation,
+    handleFavoritesClick,
+  } = useMovieCard({
+    id: movie.id,
+    title: movie.title,
+  })
   const genres = formatMovieGenres(genresList, movie.genre_ids)
-  const POSTER_SIZE = 400
-
-  const { setUsername, isLogged, setIsLogged } = useContext(
-    UserContext,
-  ) as UserContextType
-  const [isInFavorites, setIsInFavorites] = useState<boolean>(false)
-
-  const navigate = useNavigate()
-  const db = getDatabase()
-  const auth = getAuth()
-
-  function handleMovieNavigation() {
-    navigate(`/movie/${movie.id}`)
-  }
-
-  async function signInWithGoogle() {
-    signInWithPopup(auth, new GoogleAuthProvider())
-      .then((response) => {
-        setIsLogged(true)
-        setUsername(response?.user?.displayName)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  function addTofavorites() {
-    const userId = auth.currentUser?.uid
-
-    update(ref(db, 'favorites/' + userId + '/movies/' + movie.id), {
-      name: movie.title,
-    })
-      .then(() => {
-        setIsInFavorites(true)
-        console.log('salvando filme favorito')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  function removeFromFavorites() {
-    const userId = auth.currentUser?.uid
-
-    remove(ref(db, 'favorites/' + userId + '/movies/' + movie.id))
-      .then(() => {
-        console.log('removendo filme dos favoritos')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  function handleFavoritesClick() {
-    if (auth.currentUser?.uid) {
-      if (isInFavorites) {
-        removeFromFavorites()
-        setIsInFavorites(false)
-      } else {
-        addTofavorites()
-        setIsInFavorites(true)
-      }
-    } else signInWithGoogle()
-  }
-
-  function checkMovieInFavorites() {
-    const userId = auth.currentUser?.uid
-    const path = `favorites/${userId}/movies/${movie.id}`
-    const fav = ref(db, path)
-
-    onValue(fav, (value) => {
-      setIsInFavorites(value.exists())
-    })
-  }
-
-  useEffect(() => {
-    checkMovieInFavorites()
-  }, [isLogged])
 
   return (
     <div className="w-full md:max-w-[18.75rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-12">
@@ -133,7 +61,7 @@ export function MovieCard({ movie, genresList }: Props) {
           <div className="relative group">
             <button onClick={handleFavoritesClick}>
               <img
-                src={!isInFavorites ? OutlineStar : StarIcon}
+                src={!isInFavorites || !isLogged ? OutlineStar : StarIcon}
                 alt="icone de favoritos"
                 className="hover:scale-125"
               />
@@ -141,7 +69,9 @@ export function MovieCard({ movie, genresList }: Props) {
             <div className="hidden lg:hidden 2xl:block absolute opacity-0 group-hover:opacity-100 right-[6px] -top-8 group-hover:-top-4 translate-x-1/2 -translate-y-full bg-dark-contrast-dark px-4 py-1 rounded-sm transition-all ease-in-out duration-300">
               <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-dark-contrast-dark"></div>
               <p className="whitespace-nowrap font-light text-xs font-inter text-white text-opacity-50">
-                Adicionar aos favoritos
+                {isInFavorites
+                  ? 'Remover dos favoritos'
+                  : 'Adicionar aos favoritos'}
               </p>
             </div>
           </div>
