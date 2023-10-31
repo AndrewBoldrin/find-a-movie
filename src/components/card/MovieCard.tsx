@@ -9,9 +9,10 @@ import { formatMovieGenres } from '@/util/formatGenres'
 import { API } from '@/api/config'
 import { useNavigate } from 'react-router-dom'
 
-import { getDatabase, ref, update } from 'firebase/database'
-import { getAuth } from 'firebase/auth'
-import { useState } from 'react'
+import { getDatabase, onValue, ref, remove, update } from 'firebase/database'
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext, UserContextType } from '@/contexts/UserContextProvider'
 
 type Props = {
   movie: MovieDTO
@@ -22,6 +23,9 @@ export function MovieCard({ movie, genresList }: Props) {
   const genres = formatMovieGenres(genresList, movie.genre_ids)
   const POSTER_SIZE = 400
 
+  const { setUsername, isLogged, setIsLogged } = useContext(
+    UserContext,
+  ) as UserContextType
   const [isInFavorites, setIsInFavorites] = useState<boolean>(false)
 
   const navigate = useNavigate()
@@ -32,10 +36,23 @@ export function MovieCard({ movie, genresList }: Props) {
     navigate(`/movie/${movie.id}`)
   }
 
+  async function signInWithGoogle() {
+    signInWithPopup(auth, new GoogleAuthProvider())
+      .then((response) => {
+        setIsLogged(true)
+        setUsername(response?.user?.displayName)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   function addTofavorites() {
     const userId = auth.currentUser?.uid
 
-    update(ref(db, 'favorites/' + userId + '/'), { movie_info: movie.id })
+    update(ref(db, 'favorites/' + userId + '/movies/' + movie.id), {
+      name: movie.title,
+    })
       .then(() => {
         setIsInFavorites(true)
         console.log('salvando filme favorito')
@@ -44,6 +61,44 @@ export function MovieCard({ movie, genresList }: Props) {
         console.log(error)
       })
   }
+
+  function removeFromFavorites() {
+    const userId = auth.currentUser?.uid
+
+    remove(ref(db, 'favorites/' + userId + '/movies/' + movie.id))
+      .then(() => {
+        console.log('removendo filme dos favoritos')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  function handleFavoritesClick() {
+    if (auth.currentUser?.uid) {
+      if (isInFavorites) {
+        removeFromFavorites()
+        setIsInFavorites(false)
+      } else {
+        addTofavorites()
+        setIsInFavorites(true)
+      }
+    } else signInWithGoogle()
+  }
+
+  function checkMovieInFavorites() {
+    const userId = auth.currentUser?.uid
+    const path = `favorites/${userId}/movies/${movie.id}`
+    const fav = ref(db, path)
+
+    onValue(fav, (value) => {
+      setIsInFavorites(value.exists())
+    })
+  }
+
+  useEffect(() => {
+    checkMovieInFavorites()
+  }, [isLogged])
 
   return (
     <div className="w-full md:max-w-[18.75rem] hover:-translate-y-4 transition-all ease-in-out duration-300 mb-12">
@@ -76,7 +131,7 @@ export function MovieCard({ movie, genresList }: Props) {
             {movie.vote_average ? movie.vote_average.toFixed(2) : '?'}
           </p>
           <div className="relative group">
-            <button onClick={addTofavorites}>
+            <button onClick={handleFavoritesClick}>
               <img
                 src={!isInFavorites ? OutlineStar : StarIcon}
                 alt="icone de favoritos"
