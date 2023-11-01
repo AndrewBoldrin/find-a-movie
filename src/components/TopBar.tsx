@@ -82,11 +82,11 @@ export function TopBar() {
               Series
             </li>
           </button>
-          <a href="">
+          <button onClick={() => navigate('/favorites')}>
             <li className="font-poppins hover:text-red-primary transition ease-in-out delay-75">
               Favoritos
             </li>
-          </a>
+          </button>
         </ul>
         {!isLogged ? (
           <button

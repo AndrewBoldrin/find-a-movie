@@ -11,6 +11,7 @@ import { movieSections } from '@/api/Sections/moviesSections'
 import { MovieSection } from '@/components/section/MovieSection'
 import { Movie } from '@/pages/Movie'
 import { Serie } from '@/pages/Serie'
+import { Favorites } from '@/pages/Favorites'
 
 export function AppRouter() {
   return (
@@ -54,6 +55,7 @@ export function AppRouter() {
             })}
             <Route path=":id" element={<Serie />} />
           </Route>
+          <Route path="favorites" element={<Favorites />} />
         </Route>
       </Routes>
     </BrowserRouter>
