@@ -72,8 +72,8 @@ export function MovieSection({ section, hasPagination }: Props) {
         )}
       </div>
       <div className="grid grid-cols-1 md:max-lg:grid-cols-2 lg:max-xl:grid-cols-3 xl:grid-cols-4 gap-x-14 xl:gap-6 place-items-center">
-        {movies?.map((show: MovieDTO) => (
-          <MovieCard key={show.id} movie={show} genresList={genresList} />
+        {movies?.map((movie: MovieDTO) => (
+          <MovieCard key={movie.id} movie={movie} genresList={genresList} />
         ))}
         <Loading isLoading={isLoading} />
       </div>
