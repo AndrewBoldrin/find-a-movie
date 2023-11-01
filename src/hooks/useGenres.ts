@@ -1,11 +1,7 @@
 import { getMovieGenres } from '@/api/Genres/moviesGenres'
 import { getSeriesGenres } from '@/api/Genres/seriesGenres'
+import { GenreType } from '@/api/dto/genreDTO'
 import { useEffect, useState } from 'react'
-
-export type GenreType = {
-  id: number
-  name: string
-}
 
 type Props = {
   type: 'MOVIE' | 'SERIE'

@@ -9,8 +9,8 @@ import {
   useParams,
 } from 'react-router-dom'
 import { useMovieSection } from '@/hooks/useMovieSection'
-import { GenreType } from '@/hooks/useGenres'
 import { Loading } from '../Loading'
+import { GenreType } from '@/api/dto/genreDTO'
 
 type SectionType = {
   name: string

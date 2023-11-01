@@ -2,12 +2,12 @@ import DefaultMovieImage from '@/assets/DefaultMovie.png'
 import CalendarBlank from '@/assets/CalendarBlank.svg'
 import OutlineStar from '@/assets/OutlineStar.svg'
 import StarIcon from '@/assets/Star.svg'
-import { GenreType } from '@/hooks/useGenres'
 import { formatMovieGenres } from '@/util/formatGenres'
 
 import { API } from '@/api/config'
 import { SerieDTO } from '@/api/dto/serieDTO'
 import { useSerieCard } from '@/hooks/useSerieCard'
+import { GenreType } from '@/api/dto/genreDTO'
 
 type Props = {
   serie: SerieDTO

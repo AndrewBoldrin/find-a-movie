@@ -1,6 +1,5 @@
 import ArrowRight from '@/assets/ArrowRight.svg'
 import ArrowLeft from '@/assets/ArrowLeft.svg'
-import { GenreType } from '@/hooks/useGenres'
 import {
   useNavigate,
   useLocation,
@@ -11,6 +10,7 @@ import { SerieDTO } from '@/api/dto/serieDTO'
 import { SerieCard } from '../card/SerieCard'
 import { useSerieSection } from '@/hooks/useSeriesSection'
 import { Loading } from '../Loading'
+import { GenreType } from '@/api/dto/genreDTO'
 
 type SectionType = {
   name: string

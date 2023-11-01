@@ -1,4 +1,4 @@
-import { GenreType } from '@/hooks/useGenres'
+import { GenreType } from '@/api/dto/genreDTO'
 
 export function formatMovieGenres(genresList: GenreType[], genres: number[]) {
   // eslint-disable-next-line array-callback-return

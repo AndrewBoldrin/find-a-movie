@@ -1,7 +1,4 @@
-export type GenreType = {
-  id: number
-  name: string
-}
+import { GenreType } from './genreDTO'
 
 export type SerieDTO = {
   backdrop_path: string

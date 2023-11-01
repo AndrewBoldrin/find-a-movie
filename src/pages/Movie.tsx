@@ -7,9 +7,9 @@ import DefaultMovieImage from '@/assets/DefaultMovie.png'
 import ArrowLeftIcon from '@/assets/ArrowLeft.svg'
 import PlusIcon from '@/assets/Plus.svg'
 import StarIcon from '@/assets/Star@2x.svg'
-import { GenreType } from '@/api/dto/movieDTO'
 import { MovieSection } from '@/components/section/MovieSection'
 import { endpoints } from '@/api/endpoints'
+import { GenreType } from '@/api/dto/genreDTO'
 
 export function Movie() {
   const { id } = useParams()

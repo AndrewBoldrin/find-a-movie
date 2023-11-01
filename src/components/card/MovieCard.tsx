@@ -3,11 +3,11 @@ import CalendarBlank from '@/assets/CalendarBlank.svg'
 import OutlineStar from '@/assets/OutlineStar.svg'
 import StarIcon from '@/assets/Star.svg'
 import { MovieDTO } from '@/api/dto/movieDTO'
-import { GenreType } from '@/hooks/useGenres'
 import { formatMovieGenres } from '@/util/formatGenres'
 
 import { API } from '@/api/config'
 import { useMovieCard } from '@/hooks/useMovieCard'
+import { GenreType } from '@/api/dto/genreDTO'
 
 type Props = {
   movie: MovieDTO
