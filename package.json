@@ -1,5 +1,6 @@
 {
-  "name": "cinema-app",
+  "name": "find-a-movie",
+  "homepage": "https://andrewboldrin.github.io/find-a-movie",
   "private": true,
   "version": "0.0.0",
   "type": "module",
