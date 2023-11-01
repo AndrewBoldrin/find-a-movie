@@ -19,17 +19,33 @@ export function useFavorites() {
   const { isLogged } = useContext(UserContext) as UserContextType
 
   async function handleGetMovie(moviesIds: string[]) {
-    moviesIds.map(async (movieId: string) => {
-      const { data } = await getMovie(movieId)
-      setMovies((prevMovies) => [...prevMovies, data])
-    })
+    try {
+      const fecthMoviesPromises = moviesIds.map(async (movieId: string) => {
+        const { data } = await getMovie(movieId)
+        return data
+      })
+
+      const fecthedMovies = await Promise.all(fecthMoviesPromises)
+
+      setMovies(fecthedMovies)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function handleGetSerie(seriesIds: string[]) {
-    seriesIds.map(async (serieId: string) => {
-      const { data } = await getSerie(serieId)
-      setSeries((prevSeries) => [...prevSeries, data])
-    })
+    try {
+      const fechSeriesPromises = seriesIds.map(async (serieId: string) => {
+        const { data } = await getSerie(serieId)
+        return data
+      })
+
+      const fetchedSeries = await Promise.all(fechSeriesPromises)
+
+      setSeries(fetchedSeries)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function getFavorites() {
