@@ -12,6 +12,7 @@ import { MovieSection } from '@/components/section/MovieSection'
 import { Movie } from '@/pages/Movie'
 import { Serie } from '@/pages/Serie'
 import { Favorites } from '@/pages/Favorites'
+import { NotFound } from '@/pages/NotFound'
 
 export function AppRouter() {
   return (
@@ -56,6 +57,7 @@ export function AppRouter() {
             <Route path=":id" element={<Serie />} />
           </Route>
           <Route path="favorites" element={<Favorites />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
