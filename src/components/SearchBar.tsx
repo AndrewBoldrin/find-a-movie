@@ -18,9 +18,7 @@ export function SearchBar({ searchInput, setSearchInput }: Props) {
           setSearchInput(e.currentTarget.value)
         }
       />
-      <button className="hover:scale-125">
-        <img src={Search} alt="search icon" className="w-8 h-8" />
-      </button>
+      <img src={Search} alt="search icon" className="w-8 h-8" />
     </div>
   )
 }
