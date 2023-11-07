@@ -3,6 +3,7 @@ import { SerieSection } from '../section/SerieSection'
 type SectionType = {
   name: string
   endpoint: string
+  path: string
 }
 
 type Props = {

@@ -14,6 +14,7 @@ import { GenreType } from '@/api/dto/genreDTO'
 
 type SectionType = {
   name: string
+  path?: string
   endpoint: string
 }
 
@@ -23,7 +24,7 @@ type Props = {
 }
 
 export function MovieSection({ section, hasPagination }: Props) {
-  const { name, endpoint } = section
+  const { name, endpoint, path } = section
   const genresList: GenreType[] = useOutletContext()
   const { movies, isLoading } = useMovieSection({ endpoint, hasPagination })
   const navigate = useNavigate()
@@ -31,7 +32,7 @@ export function MovieSection({ section, hasPagination }: Props) {
   const { id } = useParams()
 
   function handleSectionNavigation() {
-    navigate(endpoint)
+    navigate(`${import.meta.env.VITE_BASE_PATH}movie/${path}`)
   }
 
   return (
@@ -43,7 +44,7 @@ export function MovieSection({ section, hasPagination }: Props) {
         <h1 className="font-poppins font-medium text-[1.75rem] text-center md:text-left">
           {name}
         </h1>
-        {pathname === '/movie' ? (
+        {pathname === `${import.meta.env.VITE_BASE_PATH}movie` ? (
           <button
             onClick={handleSectionNavigation}
             className="flex items-center gap-1 hover:gap-2 ml-6 text-sm font-light hover:text-zinc-400 transition-all ease-in-out duration-150"

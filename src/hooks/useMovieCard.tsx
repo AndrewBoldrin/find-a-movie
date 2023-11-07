@@ -25,7 +25,7 @@ export function useMovieCard({ id, title }: Props) {
   const databasePath = `favorites/${userId}/movies/${id}`
 
   function handleMovieNavigation() {
-    navigate(`/movie/${id}`)
+    navigate(`${import.meta.env.VITE_BASE_PATH}movie/${id}`)
   }
 
   function addTofavorites() {

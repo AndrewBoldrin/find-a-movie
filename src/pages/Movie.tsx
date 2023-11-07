@@ -17,7 +17,7 @@ export function Movie() {
   const navigate = useNavigate()
 
   function handleGoBack() {
-    navigate('/movie')
+    navigate(`${import.meta.env.VITE_BASE_PATH}movie`)
   }
 
   if (!movie)

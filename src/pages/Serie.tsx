@@ -18,7 +18,7 @@ export function Serie() {
   const navigate = useNavigate()
 
   function handleGoBack() {
-    navigate('/tv')
+    navigate(`${import.meta.env.VITE_BASE_PATH}tv`)
   }
 
   if (!serie)

@@ -2,6 +2,7 @@ import { MovieSection } from '../section/MovieSection'
 
 type SectionType = {
   name: string
+  path: string
   endpoint: string
 }
 

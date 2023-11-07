@@ -25,7 +25,7 @@ export function useSerieCard({ id, title }: Props) {
   const databasePath = `favorites/${userId}/series/${id}`
 
   function handleSerieNavigation() {
-    navigate(`/tv/${id}`)
+    navigate(`${import.meta.env.VITE_BASE_PATH}tv/${id}`)
   }
 
   function addTofavorites() {

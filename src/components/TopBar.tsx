@@ -72,17 +72,23 @@ export function TopBar() {
           />
         </div>
         <ul className="hidden md:block md:flex-1 md:flex md:gap-14">
-          <button onClick={() => navigate('/')}>
+          <button onClick={() => navigate(import.meta.env.VITE_BASE_PATH)}>
             <li className="font-poppins hover:text-red-primary transition ease-in-out delay-75">
               Filmes
             </li>
           </button>
-          <button onClick={() => navigate('/tv')}>
+          <button
+            onClick={() => navigate(`${import.meta.env.VITE_BASE_PATH}tv`)}
+          >
             <li className="font-poppins hover:text-red-primary transition ease-in-out delay-75">
               Series
             </li>
           </button>
-          <button onClick={() => navigate('/favorites')}>
+          <button
+            onClick={() =>
+              navigate(`${import.meta.env.VITE_BASE_PATH}favorites`)
+            }
+          >
             <li className="font-poppins hover:text-red-primary transition ease-in-out delay-75">
               Favoritos
             </li>
