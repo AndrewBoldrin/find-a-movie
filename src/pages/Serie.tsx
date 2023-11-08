@@ -5,15 +5,21 @@ import { API } from '@/api/config'
 import DefaultMovieImage from '@/assets/DefaultMovie.png'
 import ArrowLeftIcon from '@/assets/ArrowLeft.svg'
 import PlusIcon from '@/assets/Plus.svg'
+import RemoveIcon from '@/assets/Trash.svg'
 import StarIcon from '@/assets/Star@2x.svg'
 import { GenreType } from '@/api/dto/genreDTO'
 import { useSerie } from '@/hooks/useSerie'
 import { endpoints } from '@/api/endpoints'
 import { SerieSection } from '@/components/section/SerieSection'
+import { useSerieCard } from '@/hooks/useSerieCard'
 
 export function Serie() {
   const { id } = useParams()
   const { serie } = useSerie({ id })
+  const { isInFavorites, handleFavoritesClick } = useSerieCard({
+    id: id ? parseInt(id) : 1,
+    title: serie ? serie.name : '',
+  })
 
   const navigate = useNavigate()
 
@@ -74,9 +80,16 @@ export function Serie() {
           <p className="font-poppins font-base text-zinc-300 mt-10 text-justify">
             {serie?.overview}
           </p>
-          <button className="flex gap-4 items-center font-poppins px-4 py-3 mt-9 text-white text-base bg-red-secondary hover:bg-red-primary rounded-lg">
-            Adicione os favoritos
-            <img src={PlusIcon} alt="icone de plus" />
+          <button
+            onClick={handleFavoritesClick}
+            className="flex gap-4 items-center font-poppins px-4 py-3 mt-9 text-white text-base bg-red-secondary hover:bg-red-primary rounded-lg"
+          >
+            {isInFavorites ? 'Remover dos favoritos' : 'Adicione os favoritos'}
+            {isInFavorites ? (
+              <img src={RemoveIcon} alt="icone de Remover" />
+            ) : (
+              <img src={PlusIcon} alt="icone de plus" />
+            )}
           </button>
         </div>
       </div>
