@@ -18,7 +18,7 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={import.meta.env.BASE_URL} element={<Layout />}>
+        <Route path={import.meta.env.VITE_BASE_PATH} element={<Layout />}>
           <Route index element={<Navigate replace to="movie" />} />
           <Route path="movie" element={<Movies />}>
             <Route
