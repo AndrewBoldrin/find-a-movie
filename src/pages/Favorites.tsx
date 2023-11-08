@@ -6,11 +6,29 @@ import { MovieDTO } from '@/api/dto/movieDTO'
 import { SerieDTO } from '@/api/dto/serieDTO'
 import { Loading } from '@/components/Loading'
 import { useFavorites } from '@/hooks/useFavorites'
+import { useGoogleAuthentication } from '@/hooks/useGoogleAuthentication'
+import { getAuth } from 'firebase/auth'
 
 export function Favorites() {
   const { movies, series, isLoading, moviesGenres, seriesGenres } =
     useFavorites()
   const navigate = useNavigate()
+  const { login } = useGoogleAuthentication()
+  const auth = getAuth()
+
+  if (!auth.currentUser?.uid) {
+    return (
+      <div className="flex flex-col justify-center items-center flex-1">
+        <div>Você precisa logar para ver os seus filmes favoritos.</div>
+        <button
+          className="text-sm text-blue-500 hover:text-blue-600"
+          onClick={login}
+        >
+          ENTRE AGORA
+        </button>
+      </div>
+    )
+  }
 
   return (
     <section className="max-w-[82.5rem] w-full m-auto px-4 mt-16 md:max-xl:px-12 pb-48">
