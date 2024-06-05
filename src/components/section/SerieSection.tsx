@@ -74,6 +74,11 @@ export function SerieSection({ section, hasPagination }: Props) {
         )}
       </div>
       <div className="grid grid-cols-1 md:max-lg:grid-cols-2 lg:max-xl:grid-cols-3 xl:grid-cols-4 gap-x-14 xl:gap-6 place-items-center">
+        {series.length === 0 ? (
+          <h3>Não foi encontrado nenhuma series similar</h3>
+        ) : (
+          <></>
+        )}
         {series.map((serie: SerieDTO) => (
           <SerieCard key={serie.id} serie={serie} genresList={genresList} />
         ))}
