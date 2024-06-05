@@ -6,7 +6,7 @@
   </a>
   <h3>Find a Movie</h3>
   <p>Aplicação que permite os usuários realizarem buscas por filmes e séries</p>
-   <a href="https://andrewboldrin.github.io/find-a-movie/movie">Veja o projeto</a>
+   <a href="https://andrewboldrin.github.io/find-a-movie">Veja o projeto</a>
 </div>
 
 ##
